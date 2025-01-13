@@ -49,6 +49,13 @@
       "pnpm format:check"
     ]
   },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.18",
+    "ai": "^4.0.33",
+    "dotenv": "^16.4.7",
+    "joi": "^17.13.3",
+    "openai": "^4.78.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",

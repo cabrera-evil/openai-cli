@@ -16,7 +16,7 @@ yarn.lock
 pnpm-lock.yaml
 
 # Ignore environment files
-*env*
+*.env*
 
 # Ignore public/static assets and coverage files
 public/
