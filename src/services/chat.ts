@@ -1,3 +1,4 @@
+import { username } from '@/constants/environment';
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { Message } from '../types/message';
@@ -8,23 +9,16 @@ export class ChatService {
   private constructor(
     private readonly model: string,
     private readonly temperature: number,
-    private readonly systemPrompt: string = 'Eres un asistente llamado Morty',
-    private readonly stream: boolean = false,
+    private readonly systemPrompt: string = `Eres un asistente llamado Morty que ayuda a ${username} a resolver problemas. Responde de manera concisa y clara. No uses emojis ni lenguaje informal.`,
   ) {}
 
   static getInstance(
     model: string,
     temperature: number,
     systemPrompt?: string,
-    stream = false,
   ): ChatService {
     if (!ChatService.instance) {
-      ChatService.instance = new ChatService(
-        model,
-        temperature,
-        systemPrompt,
-        stream,
-      );
+      ChatService.instance = new ChatService(model, temperature, systemPrompt);
     }
     return ChatService.instance;
   }

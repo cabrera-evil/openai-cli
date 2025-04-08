@@ -8,6 +8,5 @@ export function setupOptions(program: Command) {
     .option('--system <prompt>', 'System prompt to use')
     .option('--save <file>', 'Save conversation to file')
     .option('--load <file>', 'Load conversation from file')
-    .option('--no-stream', 'Disable streaming response')
     .action(runner);
 }

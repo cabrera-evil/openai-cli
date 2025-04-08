@@ -1,3 +1,4 @@
+import { username } from '@/constants/environment';
 import { ChatService } from '@/services/chat';
 import { SessionService } from '@/services/session';
 import { TerminalService } from '@/services/terminal';
@@ -24,7 +25,6 @@ export async function runner(opts: RunChatOptions) {
     opts.model,
     parseFloat(opts.temperature),
     opts.system,
-    opts.stream,
   );
 
   if (opts.load) {
@@ -40,7 +40,7 @@ export async function runner(opts: RunChatOptions) {
   while (true) {
     try {
       // Ask for user input
-      const input = await terminal.prompt(chalk.greenBright('You:'));
+      const input = await terminal.prompt(chalk.greenBright(`${username}:`));
       session.add(MessageRole.USER, input);
 
       // Send user input to chat service
