@@ -27,15 +27,11 @@ export async function runner(opts: RunChatOptions) {
     opts.system,
   );
 
-  if (opts.load) {
-    await session.load(opts.load);
-    console.log(chalk.gray(`\n📂 Loaded session from ${opts.load}`));
-  }
+  // Load session if a load path is provided
+  if (opts.load) await session.load(opts.load);
 
-  if (opts.system) {
-    session.add(MessageRole.SYSTEM, opts.system);
-    console.log(chalk.magenta(`\n[System]: ${opts.system}`));
-  }
+  // Add system message if provided
+  if (opts.system) session.add(MessageRole.SYSTEM, opts.system);
 
   while (true) {
     try {
@@ -55,10 +51,7 @@ export async function runner(opts: RunChatOptions) {
       console.log(chalk.blueBright('🤖 Assistant:'), response);
 
       // Save session if a save path is provided
-      if (opts.save) {
-        await session.save(opts.save);
-        console.log(chalk.gray(`\n💾 Session saved to ${opts.save}`));
-      }
+      if (opts.save) await session.save(opts.save);
     } catch (err) {
       console.error(chalk.red('\n⨯ Error:'), err);
     }
