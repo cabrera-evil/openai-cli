@@ -4,8 +4,7 @@ import { streamText } from 'ai';
 
 export async function streamChatResponse(messages: Message[]): Promise<string> {
   const result = streamText({
-    system:
-      'Eres un asistente llamado Morty',
+    system: 'Eres un asistente llamado Morty',
     model: openai('gpt-4o-mini'),
     messages,
   });
