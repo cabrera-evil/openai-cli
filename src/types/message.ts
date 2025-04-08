@@ -1,4 +1,10 @@
 export interface Message {
-  role: 'user' | 'assistant' | 'system';
+  role: MessageRole;
   content: string;
+}
+
+export enum MessageRole {
+  USER = 'user',
+  ASSISTANT = 'assistant',
+  SYSTEM = 'system',
 }

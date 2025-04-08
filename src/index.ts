@@ -1,23 +1,26 @@
+import chalk from 'chalk';
+import { Command } from 'commander';
+import { setupOptions } from './cli/options';
 import { configEnvironment } from './config/environment';
-import { messages } from './contants/messages';
-import { streamChatResponse } from './services/chat';
-import { promptUser } from './utils/terminal';
 
-async function main(): Promise<void> {
+const program = new Command();
+
+program
+  .name(process.env.npm_package_name ?? 'cli')
+  .description('A CLI assistant powered by ChatGPT')
+  .version(process.env.npm_package_version ?? '0.0.1');
+
+setupOptions(program);
+
+async function main() {
   configEnvironment();
-  console.log('ChatGPT Assistant:');
-  while (true) {
-    messages.push({
-      role: 'user',
-      content: await promptUser('\nTú: '),
-    });
-    process.stdout.write('\nChatGPT: ');
-    messages.push({
-      role: 'assistant',
-      content: await streamChatResponse(messages),
-    });
-    process.stdout.write('\n');
+
+  try {
+    await program.parseAsync(process.argv);
+  } catch (err) {
+    console.error(chalk.red('Error:'), err);
+    process.exit(1);
   }
 }
 
-main().catch((error) => console.error(error));
+main();
