@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Build silently and exit on failure
+if pnpm build >/dev/null 2>&1; then
+    # Execute compiled CLI with all passed arguments
+    exec node dist/index.js "$@"
+fi
